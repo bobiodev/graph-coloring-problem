@@ -1,11 +1,12 @@
 from state import State
+import re
 
 
 class Graph:
-    def __init__(self, filename, m: int):
+    def __init__(self, filename):
         self.adj = get_graph(filename)
         self.n = len(self.adj)
-        self.m = m
+        self.m = int(re.findall(r'\d+', filename)[1])
         self.domains = [
             {value + 1 for value in range(self.m)}
             for variable in range(self.n)

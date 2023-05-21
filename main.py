@@ -3,10 +3,8 @@ from GreedyBacktrackMethod.backtrack import backtrack
 
 
 if __name__ == '__main__':
-    lastname = input('last name(i.e. 5a, 15b, 25c...) of le450_ > ')
-    filename = 'le450_' + lastname
-    m = int(lastname[:-1])
-    graph = Graph(filename, m)
+    filename = 'le450_' + input('last name(i.e. 5a, 15b, 25c...) of le450_ > ')
+    graph = Graph(filename)
 
     solution = backtrack(graph)
     if solution:

@@ -44,20 +44,20 @@ unassigned vertices.
 
 ## Test
 
-| file          | backtracks | time/s |
-|---------------|------------|--------|
-| le450_5a.col  | 449        | 0.6    |
-| le450_5b.col  | 17         | 0.4    |
-| le450_5c.col  | 13         | 0.5    |
-| le450_5d.col  | 0          | 0.3    |
-| le450_15a.col |            |        |
-| le450_15b.col | 2347       | 0.9    |
-| le450_15c.col |            |        |
-| le450_15d.col |            |        |
-| le450_25a.col | 0          | 0.2    |
-| le450_25b.col | 0          | 0.2    |
-| le450_25c.col |            |        |
-| le450_25d.col |            |        |
+| file          | backtracks | time  |
+|---------------|------------|-------|
+| le450_5a.col  | 166        | 48ms  |
+| le450_5b.col  | 4          | 49ms  |
+| le450_5c.col  | 6          | 76ms  |
+| le450_5d.col  | 0          | 58ms  |
+| le450_15a.col |            |       |
+| le450_15b.col | 1202       | 674ms |
+| le450_15c.col |            |       |
+| le450_15d.col |            |       |
+| le450_25a.col | 0          | 178ms |
+| le450_25b.col | 0          | 203ms |
+| le450_25c.col |            |       |
+| le450_25d.col |            |       |
 
 ## Usage
 

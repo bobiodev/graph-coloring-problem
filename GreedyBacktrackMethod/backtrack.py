@@ -20,6 +20,7 @@ def backtracking(graph: Graph) -> []:
     domains = graph.domains
     assignments = graph.assignments
     domains_log = graph.domains_log
+    assign_log = graph.assign_log
     state = graph.state
     state.update_bar(graph)
 
@@ -43,6 +44,8 @@ def backtracking(graph: Graph) -> []:
                         state.btk += 1
                         graph.level -= 1
             assignments[variable] = 0
+            while assign_log[level]:
+                assignments[assign_log[level].pop()] = 0
             while domains_log[level]:
                 (var, val) = domains_log[level].pop()
                 domains[var].add(val)

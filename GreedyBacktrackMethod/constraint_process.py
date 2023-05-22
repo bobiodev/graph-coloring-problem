@@ -26,6 +26,7 @@ def arc_consistency_checking(graph) -> bool:
     n = graph.n
     adj = graph.adj
     assignments = graph.assignments
+    assign_log = graph.assign_log
     domains = graph.domains
     domains_log = graph.domains_log
     level = graph.level
@@ -44,7 +45,7 @@ def arc_consistency_checking(graph) -> bool:
         (i, j) = arcs.pop()
         """ If the only remaining value in the second variable's domain 
             is not a possible value for the first variable, the arc is skipped. """
-        value = domains[j].copy().pop()
+        value = list(domains[j])[0]
         if value not in domains[i]:
             continue
         """ if the remaining value is in the first variable's domain, 
@@ -60,4 +61,25 @@ def arc_consistency_checking(graph) -> bool:
             and added to the list of arcs to be checked."""
         if len(domains[i]) == 1:
             arcs.extend([(k, i) for k in adj[i] if assignments[k] == 0])
+
+    """ This code essentially checks for a condition where three unassigned nodes 
+        var, x, and y form a path such that they have exactly two colors in their 
+        domains and these domains are identical. If such a path exists, it returns 
+        False, indicating a violation of Path Consistency, because for a graph 
+        coloring problem, at least one node in a triangle (a 3-cycle path) should 
+        have more than two colors in its domain to allow a proper 3-coloring. """
+    for var in range(n):
+        if assignments[var] == 0 and len(domains[var]) == 2:
+            for x in adj[var]:
+                if assignments[x] == 0 and len(domains[x]) == 2 and domains[x] == domains[var]:
+                    for y in adj[x]:
+                        if assignments[y] == 0 and y in adj[var] and len(domains[y]) == 2 and domains[y] == domains[x]:
+                            return False
+
+    """ to reduce the size of the problem by instantly assigning values 
+        to the variables which have only one remaining choice. """
+    for var in range(n):
+        if assignments[var] == 0 and len(domains[var]) == 1:
+            assignments[var] = list(domains[var])[0]
+            assign_log[level].append(var)
     return True

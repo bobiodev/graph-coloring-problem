@@ -28,11 +28,6 @@ Another heuristic strategy that selects the color that leaves the most freedom f
 A heuristic that prioritizes coloring vertices with the highest degree (the most edges connected to it), which is based
 on the logic that they pose the most constraints.
 
-### Maximum Saturation Degree (DSATUR)
-
-This heuristic selects the vertex with the highest saturation degree (i.e., the highest number of different colored
-neighbors) for coloring.
-
 ### Forward Checking
 
 This technique checks whether a future assignment is possible before making a current assignment.

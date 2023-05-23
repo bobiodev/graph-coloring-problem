@@ -30,9 +30,9 @@ class State:
             right = right.replace('--', '', 1)
         bar = '[' + left + str(p) + "%" + emoji + right + ']'
         tme = time.time() - self.tme
-        state = ' ' + str(round(tme, 3)) + 's'
-        state += ' ⤴️' + str(self.btk)
-        # state += ' ' + str(self.tst)
+        state = ' ' + str(round(tme, 1)) + 's'
+        state += ' ⤴ ' + str(self.btk)
+        # state += ' ' + self.tst
         if var is not None and val is not None:
             state += f' {var}:{val}:{domains[var]}'
         sys.stdout.write('\033[1;32m ' + bar + state + '\r\033[0m')

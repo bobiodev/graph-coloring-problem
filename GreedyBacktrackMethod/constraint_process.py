@@ -1,7 +1,21 @@
 def constraint_checking(graph, var, val):
-    adj = graph.adj
+    domains = graph.domains
     assignments = graph.assignments
-    return all(assignments[neighbor] != val for neighbor in adj[var])
+    level = graph.level
+    assign_log = graph.assign_log
+    n = graph.n
+    if forward_checking(graph, var, val) \
+            and arc_consistency(graph) \
+            and path_consistency(graph):
+        """ to reduce the size of the problem by instantly assigning values 
+            to the variables which have only one remaining choice. """
+        for var in range(n):
+            if assignments[var] == 0 and len(domains[var]) == 1:
+                assignments[var] = list(domains[var])[0]
+                assign_log[level].append(var)
+        return True
+    else:
+        return False
 
 
 def forward_checking(graph, var: int, value: int) -> bool:
@@ -22,11 +36,10 @@ def forward_checking(graph, var: int, value: int) -> bool:
     return True
 
 
-def arc_consistency_checking(graph) -> bool:
+def arc_consistency(graph) -> bool:
     n = graph.n
     adj = graph.adj
     assignments = graph.assignments
-    assign_log = graph.assign_log
     domains = graph.domains
     domains_log = graph.domains_log
     level = graph.level
@@ -61,7 +74,14 @@ def arc_consistency_checking(graph) -> bool:
             and added to the list of arcs to be checked."""
         if len(domains[i]) == 1:
             arcs.extend([(k, i) for k in adj[i] if assignments[k] == 0])
+    return True
 
+
+def path_consistency(graph):
+    n = graph.n
+    adj = graph.adj
+    assignments = graph.assignments
+    domains = graph.domains
     """ This code essentially checks for a condition where three unassigned nodes 
         var, x, and y form a path such that they have exactly two colors in their 
         domains and these domains are identical. If such a path exists, it returns 
@@ -75,11 +95,4 @@ def arc_consistency_checking(graph) -> bool:
                     for y in adj[x]:
                         if assignments[y] == 0 and y in adj[var] and len(domains[y]) == 2 and domains[y] == domains[x]:
                             return False
-
-    """ to reduce the size of the problem by instantly assigning values 
-        to the variables which have only one remaining choice. """
-    for var in range(n):
-        if assignments[var] == 0 and len(domains[var]) == 1:
-            assignments[var] = list(domains[var])[0]
-            assign_log[level].append(var)
     return True

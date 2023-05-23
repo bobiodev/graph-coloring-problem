@@ -46,16 +46,16 @@ unassigned vertices.
 
 | file          | backtracks | time  | memory |
 |---------------|------------|-------|--------|
-| le450_5a.col  | 166        | 48ms  | 16MB   |
+| le450_5a.col  | 166        | 266ms | 16MB   |
 | le450_5b.col  | 4          | 49ms  | 16MB   |
 | le450_5c.col  | 6          | 76ms  | 16MB   |
 | le450_5d.col  | 0          | 58ms  | 16MB   |
 | le450_15a.col |            |       |        |
-| le450_15b.col | 1202       | 674ms | 16MB   |
+| le450_15b.col | 182        | 251ms | 16MB   |
 | le450_15c.col |            |       |        |
 | le450_15d.col |            |       |        |
 | le450_25a.col | 0          | 178ms | 16MB   |
-| le450_25b.col | 0          | 203ms | 17MB   |
+| le450_25b.col | 0          | 181ms | 16MB   |
 | le450_25c.col |            |       |        |
 | le450_25d.col |            |       |        |
 

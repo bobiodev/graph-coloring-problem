@@ -1,4 +1,4 @@
-def max_degree(graph, variables: [] = None) -> int:
+def max_degree(graph, variables: [] = None, MRV=True) -> int:
     adj = graph.adj
     n = graph.n
     m = graph.m
@@ -14,28 +14,29 @@ def max_degree(graph, variables: [] = None) -> int:
     md = max(degrees.values())
     variables = [var for var in variables if degrees[var] == md]
 
-    if m == 5:
-        return variables[0]
-    return variables[-1]
+    if len(variables) == 1 or not MRV:
+        if m == 5:
+            return variables[0]
+        return variables[-1]
+    return minimum_remaining_values(graph, variables, DH=False)
 
 
-def minimum_remaining_values(graph, MAX_DEGREE: bool = True) -> int:
+def minimum_remaining_values(graph, variables: [] = None, DH=True) -> int:
     n = graph.n
-    adj = graph.adj
     domains = graph.domains
     assignments = graph.assignments
 
     """ Minimum Remaining Values (MRV) heuristic for variable ordering
         The MRV heuristic selects the variable with the smallest domain 
         (i.e., fewest remaining legal values) for assignment next. """
-
-    variables = [var for var in range(n) if assignments[var] == 0]
+    if variables is None:
+        variables = [var for var in range(n) if assignments[var] == 0]
     mrv = len(domains[min(variables, key=lambda var: len(domains[var]))])
     variables = [var for var in variables if len(domains[var]) == mrv]
 
-    if len(variables) == 1 or not MAX_DEGREE:
+    if len(variables) == 1 or not DH:
         return variables[0]
-    return max_degree(graph, variables)
+    return max_degree(graph, variables, MRV=False)
 
 
 def least_constraining_value(graph, var: int) -> [int]:

@@ -5,7 +5,7 @@ Graph Coloring Problem. The Graph Coloring Problem is a classic and computationa
 science and combinatorics, where we aim to assign colors to the vertices of a graph such that no two adjacent vertices
 share the same color.
 
-## Getting Start
+## Getting Started
 
 This project requires Python interpreter version 3.5 or above.
 To run the project, execute the following command:

@@ -41,7 +41,7 @@ def backtracking(graph: Graph) -> []:
 
 
 def backtrack(graph: Graph) -> []:
-    graph.tme = time.time()
+    graph.state.tme = time.time()
     solution = backtracking(graph)
     print()
     return solution

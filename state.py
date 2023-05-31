@@ -6,6 +6,7 @@ class State:
     def __init__(self):
         self.btk = 0                # backtracking
         self.tme = time.time()      # time
+        self.level = 0              # recursion stack depth
         self.tst = 0                # for test
 
     def update_bar(self, graph, var=None, val=None):

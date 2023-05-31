@@ -47,6 +47,13 @@ This technique checks whether a future assignment is possible before making a cu
 An advanced constraint propagation technique that reduces the search space by eliminating values from the domains of
 unassigned vertices.
 
+### Path Consistency
+
+Path consistency in graph coloring ensures that if a path between two vertices can be colored 
+consistently, the endpoints can share a color. This simplifies the problem by eliminating 
+invalid color choices, reducing computational complexity, and increasing efficiency of finding 
+a solution.
+
 ## Test
 
 | file          | backtracks | time  | memory |

@@ -1,7 +1,7 @@
 def constraint_checking(graph, var, val):
     domains = graph.domains
     assignments = graph.assignments
-    level = graph.level
+    level = graph.state.level
     assign_log = graph.assign_log
     n = graph.n
     if forward_checking(graph, var, val) \
@@ -23,7 +23,7 @@ def forward_checking(graph, var: int, value: int) -> bool:
     domains = graph.domains
     assignments = graph.assignments
     domains_log = graph.domains_log
-    level = graph.level
+    level = graph.state.level
     """ Filtering: Forward Checking
         cross off values that violate a constraint
         when added to the existing assignment. """
@@ -42,7 +42,7 @@ def arc_consistency(graph) -> bool:
     assignments = graph.assignments
     domains = graph.domains
     domains_log = graph.domains_log
-    level = graph.level
+    level = graph.state.level
     """ this code performs arc consistency checking to eliminate inconsistent values 
         from variable domains in a CSP, which can greatly reduce the search space and 
         improve performance for solving the problem. """

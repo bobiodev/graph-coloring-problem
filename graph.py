@@ -14,7 +14,6 @@ class Graph:
         self.assignments = [0 for variable in range(self.n)]
         self.domains_log = [[] for level in range(self.n)]
         self.assign_log = [[] for level in range(self.n)]
-        self.level = 0
         self.state = State()
 
 

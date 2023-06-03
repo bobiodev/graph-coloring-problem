@@ -111,16 +111,16 @@ by eliminating redundant search paths and avoiding unnecessary computations.
 
 | file          | min colors | techniques enable | best scenario time | backtracking |
 |---------------|------------|-------------------|--------------------|--------------|
-| le450_5a.col  | 5          | -                 | 0.3s               | 166          |
-| le450_5b.col  | 5          | -                 | 0.1s               | 4            |
-| le450_5c.col  | 5          | -                 | 0.1s               | 6            |
-| le450_5d.col  | 5          | -                 | 0.1s               | 0            |
-| le450_15a.col | 15         | rfj               | 1.99hrs            | 14265710     |
-| le450_15b.col | 15         | rfj               | 0.1s               | 0            |
+| le450_5a.col  | 5 ✅       | -                 | 0.3s               | 166          |
+| le450_5b.col  | 5 ✅       | -                 | 0.1s               | 4            |
+| le450_5c.col  | 5 ✅       | -                 | 0.1s               | 6            |
+| le450_5d.col  | 5 ✅       | -                 | 0.1s               | 0            |
+| le450_15a.col | 15 ✅      | rfj               | 1.99hrs            | 14265710     |
+| le450_15b.col | 15 ✅      | rfj               | 0.1s               | 0            |
 | le450_15c.col | 22         | rfj               | 3.9s               | 3971         |
 | le450_15d.col | 23         | rfj               | 0.8s               | 663          |
-| le450_25a.col | 25         | -                 | 0.2s               | 0            |
-| le450_25b.col | 25         | -                 | 0.2s               | 0            |
+| le450_25a.col | 25 ✅      | -                 | 0.2s               | 0            |
+| le450_25b.col | 25 ✅      | -                 | 0.2s               | 0            |
 | le450_25c.col | 27         | j                 | 2.0s               | 1422         |
 | le450_25d.col | 27         | rfj               | 12.0s              | 12478        |
 

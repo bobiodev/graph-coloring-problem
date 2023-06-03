@@ -1,7 +1,7 @@
 import random
 
 
-def max_degree(graph, variables: [], RANDOM) -> int:
+def max_degree(graph, variables: []) -> int:
 
     adj = graph.adj
     assignments = graph.assignments
@@ -16,12 +16,12 @@ def max_degree(graph, variables: [], RANDOM) -> int:
     md = max(degrees.values())
     variables = [var for var in variables if degrees[var] == md]
 
-    if RANDOM:
+    if graph.state.RANDOM:
         return random.choice(variables)
     return next(iter(variables))
 
 
-def minimum_remaining_values(graph, RANDOM) -> int:
+def minimum_remaining_values(graph) -> int:
 
     n = graph.n
     domains = graph.domains
@@ -35,10 +35,10 @@ def minimum_remaining_values(graph, RANDOM) -> int:
     mrv = len(domains[min(variables, key=lambda var: len(domains[var]))])
     variables = [var for var in variables if len(domains[var]) == mrv]
 
-    return max_degree(graph, variables, RANDOM)
+    return max_degree(graph, variables)
 
 
-def least_constraining_value(graph, var: int, FILTER) -> [int]:
+def least_constraining_value(graph, var: int) -> [int]:
 
     adj = graph.adj
     domains = graph.domains
@@ -49,7 +49,7 @@ def least_constraining_value(graph, var: int, FILTER) -> [int]:
         create in the remaining unassigned variables. 
         The values that would create fewer conflicts are ordered first. """
 
-    if not FILTER:
+    if not graph.state.FILTER:
         values = sorted(domains[var],
                         key=lambda value:
                         sum(value in domains[neighbor] for neighbor in adj[var]))

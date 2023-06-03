@@ -48,14 +48,12 @@ class State:
         if value not in self.graph.assignments:
             self.graph.domains[variable] = {value}
 
-    def forward(self, variable):
+    def forward(self):
         self.update_bar(self.graph)
         self.level += 1
-        self.assign_stack.append(variable)
 
     def backward(self):
         self.level -= 1
-        self.assign_stack.pop()
         self.btk += 1
 
     def data_recovery(self, domains, assignments):
@@ -65,19 +63,21 @@ class State:
             (var, val) = self.domain_log[self.level].pop()
             domains[var].add(val)
 
-    def jump_to(self, target):
+    def jump_from(self, launcher):
         if self.JUMPING:
-            self.jumpto = next(iter(var for var in self.assign_stack[::-1] if var in self.graph.adj[target]), None)
+            self.jumpto = next(iter(var for var in self.assign_stack[::-1] if var in self.graph.adj[launcher]), None)
 
-    def targeting(self, match):
+    def targeting(self, matcher):
         if self.JUMPING and self.jumpto is not None:
-            if match != self.jumpto:
+            if matcher != self.jumpto:
                 return False
             self.jumpto = None
         return True
 
     def assign(self, variable, value):
         self.graph.assignments[variable] = value
+        self.assign_stack.append(variable)
 
     def unassign(self, variable):
         self.graph.assignments[variable] = 0
+        self.assign_stack.pop()

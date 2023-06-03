@@ -17,18 +17,16 @@ def backtracking(graph: Graph) -> []:
         state.value_symmetry(variable, value)
         state.assign(variable, value)
         if constraint_checking(graph, variable, value):
-            state.forward(variable)
+            state.forward()
             result = backtracking(graph)
             if result is not None:
                 return result
             state.backward()
         state.unassign(variable)
         state.data_recovery(domains, assignments)
-
-        if not state.targeting(match=variable):
+        if not state.targeting(matcher=variable):
             return None
-
-    state.jump_to(target=variable)
+    state.jump_from(launcher=variable)
     return None
 
 
@@ -37,5 +35,4 @@ def backtrack(graph: Graph) -> []:
     solution = backtracking(graph)
     graph.state.update_bar(graph, NONE=solution is None)
     print()
-
     return solution

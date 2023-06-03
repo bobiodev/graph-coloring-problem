@@ -1,5 +1,4 @@
 from GreedyBacktrackMethod.state import State
-import re
 
 
 class Graph:

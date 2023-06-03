@@ -3,20 +3,18 @@ from .heuristic_order import *
 from .constraint_process import *
 from .state import *
 
-RANDOM: bool
-FILTER: bool
-JUMPING: bool
-JUDGING: bool
+RANDOM:         bool = True
+FILTER:         bool = True
+JUMPING:        bool = True
 
-graph: Graph
-adj: []
-domains: []
-assignments: []
+adj:            list = []
+domains:        list = []
+assignments:    list = []
 
-state: State
-domain_log: []
-assign_log: []
-assign_stack: []
+state:          object = None
+domain_log:     list = []
+assign_log:     list = []
+assign_stack:   list = []
 
 
 def backtracking(graph: Graph) -> []:
@@ -46,7 +44,7 @@ def backtracking(graph: Graph) -> []:
                 state.jumpto = None
 
     if JUMPING:
-        state.jumpto = next((var for var in assign_stack[::-1] if var in adj[variable]), None)
+        state.jumpto = next(iter(var for var in assign_stack[::-1] if var in adj[variable]), None)
     return None
 
 
@@ -62,14 +60,14 @@ def backtrack(graph: Graph) -> []:
     assign_log = state.assign_log
     assign_stack = state.assign_stack
 
-    global RANDOM, FILTER, JUMPING, JUDGING
+    global RANDOM, FILTER, JUMPING
     RANDOM = state.RANDOM
     FILTER = state.FILTER
     JUMPING = state.JUMPING
 
     state.tme = time.time()
     solution = backtracking(graph)
-    if solution is None:
-        state.update_bar(graph, NONE=True)
+    state.update_bar(graph, NONE=solution is None)
     print()
+
     return solution

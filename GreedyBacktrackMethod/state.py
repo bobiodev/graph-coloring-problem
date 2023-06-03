@@ -8,7 +8,7 @@ class State:
         self.tme = time.time()      # time
         self.level = 0              # recursion stack depth
         self.jumpto = None
-        self.assign_stack = [[] for _ in range(graph.n)]
+        self.assign_stack = []
         self.assign_log = [[] for _ in range(graph.n)]
         self.domain_log = [[] for _ in range(graph.n)]
         self.RANDOM = True

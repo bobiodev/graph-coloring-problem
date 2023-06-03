@@ -10,50 +10,96 @@ share the same color.
 This project requires Python interpreter version 3.5 or above.
 To run the project, execute the following command:
 
-```bash
+```zsh
 python main.py
 # or
 python3 main.py
 ```
 
-## Algorithms
+## Algorithms & Techniques
 
 In our approach to solving the Graph Coloring Problem, we have implemented a variety of algorithms, each with its unique
 strengths, which include:
 
 ### Backtracking
 
-A fundamental algorithm that explores all possible coloring configurations to find a solution. While it can be
-computationally expensive, it serves as a basis for many other advanced techniques.
+Backtracking is a fundamental technique used in graph coloring algorithms to systematically 
+explore and search for solutions in a problem space. It involves a depth-first search traversal
+of the search tree, making assignments to variables and backtracking when a constraint violation
+occurs.
 
-### Minimum Remaining Values (MRV)
+In regular backtracking, the algorithm assigns values to variables one at a time, exploring the
+search space until a valid solution is found or all possibilities have been exhausted. When a 
+variable assignment leads to a constraint violation, the algorithm backtracks to the previous 
+assignment and explores alternative options.
 
-An optimization strategy that chooses the vertex with the fewest remaining valid colors to color next.
+#### Conflict-Directed Backjumping
 
-### Least Constraining Value (LCV)
+Conflict-Directed Backjumping (CDB) is an optimization technique applied during backtracking.
+It aims to improve efficiency by identifying and avoiding unnecessary search paths. CDB uses 
+conflict information to determine which variables and assignments are responsible for the 
+conflicts and "jumps" directly to a higher-level variable that may have caused the conflict,
+skipping intermediate search states.
 
-Another heuristic strategy that selects the color that leaves the most freedom for subsequent vertex colorings.
+### Heuristic Ordering
 
-### Degree Heuristic
+Heuristic ordering techniques are employed in graph coloring algorithms to determine the order
+in which variables are assigned values. They aim to improve efficiency by selecting variables 
+that are likely to result in successful assignments or provide valuable information during the 
+search process.
 
-A heuristic that prioritizes coloring vertices with the highest degree (the most edges connected to it), which is based
-on the logic that they pose the most constraints.
+#### Minimum Remaining Values
 
-### Forward Checking
+Minimum Remaining Values (MRV) is a heuristic that selects the variable with the fewest 
+remaining legal values. It prioritizes variables that have the least number of options, 
+potentially reducing the branching factor and the search space.
 
-This technique checks whether a future assignment is possible before making a current assignment.
+#### Least Constraining Value
 
-### Arc Consistency (AC)
+Least Constraining Value (LCV) is a heuristic that selects the value that rules out the fewest
+choices for neighboring variables. It considers the impact of each value on the constraints of
+neighboring variables, preferring values that allow for greater flexibility in subsequent 
+assignments.
 
-An advanced constraint propagation technique that reduces the search space by eliminating values from the domains of
-unassigned vertices.
+#### Degree Heuristic
 
-### Path Consistency
+Degree Heuristic (DH) is a heuristic that selects the variable with the largest degree, i.e., 
+the variable connected to the most other variables in the graph. It prioritizes variables that
+have a higher degree of interaction with other variables, potentially leading to earlier 
+constraint propagation and more informed decisions.
 
-Path consistency in graph coloring ensures that if a path between two vertices can be colored
-consistently, the endpoints can share a color. This simplifies the problem by eliminating
-invalid color choices, reducing computational complexity, and increasing efficiency of finding
-a solution.
+### Constraint Propagation
+
+Constraint propagation is a technique used in graph coloring algorithms to enforce consistency
+among the variables and their domains. It aims to reduce the search space by eliminating invalid
+assignments based on the constraints of the problem.
+
+#### Forward Checking
+
+Forward checking is a local consistency technique that updates the domains of unassigned variables
+after assigning a value to a variable. It removes inconsistent values from neighboring variables'
+domains, pruning options that violate constraints.
+
+#### Arc Consistency
+
+Arc consistency, also known as AC-3, is a more global consistency technique. It ensures that 
+every value in a variable's domain is consistent with all its neighbors. It iteratively checks 
+and removes values that cannot satisfy the constraints, propagating these constraints through 
+the graph.
+
+#### Path Consistency
+
+Path consistency is a stronger form of consistency than arc consistency. It extends the idea of
+arc consistency by considering longer paths in the graph. It enforces consistency along all 
+possible paths between variables, ensuring that no values violate the constraints.
+
+### Value Symmetry
+
+In graph coloring algorithms, the "value symmetry" technique refers to a strategy that exploits
+symmetry in the assignment of values to variables. It aims to reduce redundancy and improve the
+efficiency of the algorithm. Value symmetry arises when there are multiple equivalent assignments of values to variables 
+that result in the same overall solution. The value symmetry technique leverages this property
+by eliminating redundant search paths and avoiding unnecessary computations.
 
 ## Test
 

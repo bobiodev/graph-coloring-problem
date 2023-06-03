@@ -9,6 +9,7 @@ share the same color.
 
 This project requires Python interpreter version 3.5 or above.
 To run the project, execute the following command:
+
 ```bash
 python main.py
 # or
@@ -49,27 +50,27 @@ unassigned vertices.
 
 ### Path Consistency
 
-Path consistency in graph coloring ensures that if a path between two vertices can be colored 
-consistently, the endpoints can share a color. This simplifies the problem by eliminating 
-invalid color choices, reducing computational complexity, and increasing efficiency of finding 
+Path consistency in graph coloring ensures that if a path between two vertices can be colored
+consistently, the endpoints can share a color. This simplifies the problem by eliminating
+invalid color choices, reducing computational complexity, and increasing efficiency of finding
 a solution.
 
 ## Test
 
-| file          | backtracks | time  | memory |
-|---------------|------------|-------|--------|
-| le450_5a.col  | 166        | 266ms | 16MB   |
-| le450_5b.col  | 4          | 49ms  | 16MB   |
-| le450_5c.col  | 6          | 76ms  | 16MB   |
-| le450_5d.col  | 0          | 58ms  | 16MB   |
-| le450_15a.col |            |       |        |
-| le450_15b.col | 182        | 251ms | 16MB   |
-| le450_15c.col |            |       |        |
-| le450_15d.col |            |       |        |
-| le450_25a.col | 0          | 178ms | 16MB   |
-| le450_25b.col | 0          | 181ms | 16MB   |
-| le450_25c.col |            |       |        |
-| le450_25d.col |            |       |        |
+| file          | min colors | techniques enable | best scenario time | backtracking |
+|---------------|------------|-------------------|--------------------|--------------|
+| le450_5a.col  | 5          | -                 | 0.3s               | 166          |
+| le450_5b.col  | 5          | -                 | 0.1s               | 4            |
+| le450_5c.col  | 5          | -                 | 0.1s               | 6            |
+| le450_5d.col  | 5          | -                 | 0.1s               | 0            |
+| le450_15a.col | 15         | rfj               | 1.99hrs            | 14265710     |
+| le450_15b.col | 15         | rfj               | 0.1s               | 0            |
+| le450_15c.col | 22         |                   |                    |              |
+| le450_15d.col | 23         |                   |                    |              |
+| le450_25a.col | 25         | -                 |                    |              |
+| le450_25b.col | 25         | -                 |                    |              |
+| le450_25c.col | 27         |                   |                    |              |
+| le450_25d.col | 27         |                   |                    |              |
 
 ## Usage
 

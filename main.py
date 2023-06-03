@@ -11,8 +11,18 @@ def final_check(graph: Graph, solution: []):
 
 
 if __name__ == '__main__':
-    filename = 'le450_' + input('last name(i.e. 5a, 15b, 25c...) of le450_ > ')
+    firstname = 'le450_'
+    filename = firstname + input(f'last name(i.e. 5a, 15b, 25c...) of {firstname} > ')
     graph = Graph(filename)
+
+    print("\033[31m"
+          "Warning ⚠️ The following techniques might lead the algorithm to no solution, "
+          "use them cautiously.\033[0m\n"
+          "Enter 'n' to disable a specific technique.")
+
+    graph.state.RANDOM = input('Random choice from MRV-DHed variables 😨 > ') != 'n'
+    graph.state.FILTER = input('Filter values after LCV sorting       😰 > ') != 'n'
+    graph.state.JUMPING = input('Enable Conflict-Directed Backjumping  😱 > ') != 'n'
 
     solution = backtrack(graph)
 

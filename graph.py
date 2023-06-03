@@ -1,20 +1,17 @@
-from state import State
-import re
+from GreedyBacktrackMethod.state import State
 
 
 class Graph:
     def __init__(self, filename):
         self.adj = get_graph(filename)
+        self.m = int(input('color: '))
         self.n = len(self.adj)
-        self.m = int(re.findall(r'\d+', filename)[1])
         self.domains = [
             {value + 1 for value in range(self.m)}
-            for variable in range(self.n)
+            for _ in range(self.n)
         ]
-        self.assignments = [0 for variable in range(self.n)]
-        self.domains_log = [[] for level in range(self.n)]
-        self.assign_log = [[] for level in range(self.n)]
-        self.state = State()
+        self.assignments = [0] * self.n
+        self.state = State(self)
 
 
 def get_graph(filename):
@@ -41,5 +38,4 @@ def get_graph(filename):
                 adj[j].add(i)
         print(f'edges: {edges}')
         print(f'nodes: {nodes}')
-        print(f'color: {filename[6:-1]}')
     return adj

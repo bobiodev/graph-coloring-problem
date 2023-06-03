@@ -66,7 +66,6 @@ def backtrack(graph: Graph) -> []:
     RANDOM = state.RANDOM
     FILTER = state.FILTER
     JUMPING = state.JUMPING
-    JUDGING = state.JUDGING
 
     state.tme = time.time()
     solution = backtracking(graph)

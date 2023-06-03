@@ -4,25 +4,16 @@ import sys
 
 class State:
     def __init__(self, graph):
-        # for test
-        self.tst = 0
-        # backtracking
-        self.btk = 0
-        # time
-        self.tme = time.time()
-        # recursion stack depth
-        self.level = 0
-        # for backjumping
-        self.assign_stack = []
+        self.btk = 0                # backtracking
+        self.tme = time.time()      # time
+        self.level = 0              # recursion stack depth
         self.jumpto = None
-        # assign & domain log for recovering
+        self.assign_stack = [[] for _ in range(graph.n)]
         self.assign_log = [[] for _ in range(graph.n)]
         self.domain_log = [[] for _ in range(graph.n)]
-        # constants
-        self.FILTER = True
         self.RANDOM = True
+        self.FILTER = True
         self.JUMPING = True
-        self.JUDGING = True
 
     def update_bar(self, graph, NONE=False):
         level = len([value for value in graph.assignments if value != 0])
@@ -49,14 +40,13 @@ class State:
         tme = time.time() - self.tme
         state = ' ' + str(round(tme, 1)) + 's'
         state += ' ⤴ ' + str(self.btk)
-        # state += ' ' + str(self.jumpto)
         sys.stdout.write('\033[1;32m ' + bar + state + '\r\033[0m')
         sys.stdout.flush()
 
-    def forward(self, graph, var):
-        self.level += 1
-        self.assign_stack.append(var)
+    def forward(self, graph, variable):
         self.update_bar(graph)
+        self.level += 1
+        self.assign_stack.append(variable)
 
     def backward(self):
         self.level -= 1

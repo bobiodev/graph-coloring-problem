@@ -33,7 +33,7 @@ search space until a valid solution is found or all possibilities have been exha
 variable assignment leads to a constraint violation, the algorithm backtracks to the previous 
 assignment and explores alternative options.
 
-#### Conflict-Directed Backjumping
+#### Conflict-Directed Backjumping ⚠️
 
 Conflict-Directed Backjumping (CDB) is an optimization technique applied during backtracking.
 It aims to improve efficiency by identifying and avoiding unnecessary search paths. CDB uses 
@@ -54,12 +54,18 @@ Minimum Remaining Values (MRV) is a heuristic that selects the variable with the
 remaining legal values. It prioritizes variables that have the least number of options, 
 potentially reducing the branching factor and the search space.
 
+`Optimization ⚠️` Randomly choice a variable from the sorted variables to avoid the search process getting 
+trapped in local optima.
+
 #### Least Constraining Value
 
 Least Constraining Value (LCV) is a heuristic that selects the value that rules out the fewest
 choices for neighboring variables. It considers the impact of each value on the constraints of
 neighboring variables, preferring values that allow for greater flexibility in subsequent 
 assignments.
+
+`Optimization ⚠️` Filter the sorted values and return those values which have fewer or equal 
+constraints than the average.
 
 #### Degree Heuristic
 

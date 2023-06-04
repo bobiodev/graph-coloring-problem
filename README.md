@@ -12,7 +12,9 @@ To run the project, execute the following command:
 
 ```zsh
 python main.py
-# or
+```
+or
+```zsh
 python3 main.py
 ```
 

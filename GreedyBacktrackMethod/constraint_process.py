@@ -42,16 +42,15 @@ def forward_checking(var: int, value: int) -> bool:
     return True
 
 
-def arc_consistency() -> bool:
-
+def arc_consistency(arcs=None) -> bool:
     """ The Arc-Consistency refines domains of variables before assignments by
         iteratively removing inconsistent values from each variable's domain,
         it ensures that every possible assignment is consistent with the coloring
         constraints, leading to a solution space that is easier to navigate and
         reducing the need for backtracking. """
-
-    arcs = [(i, j) for i in range(n) if assignments[i] == 0
-            for j in adj[i] if assignments[j] == 0 and len(domains[j]) == 1]
+    if arcs is None:
+        arcs = [(i, j) for i in range(n) if assignments[i] == 0
+                for j in adj[i] if assignments[j] == 0 and len(domains[j]) == 1]
     while arcs:
         (i, j) = arcs.pop()
         value = next(iter(domains[j]))
@@ -74,11 +73,19 @@ def path_consistency() -> bool:
         coloring problem, at least one node in a triangle (a 3-cycle path) should 
         have more than two colors in its domain to allow a proper 3-coloring. """
 
-    for var in range(n):
-        if assignments[var] == 0 and len(domains[var]) == 2:
-            for x in adj[var]:
-                if assignments[x] == 0 and len(domains[x]) == 2 and domains[x] == domains[var]:
-                    for y in adj[x]:
-                        if assignments[y] == 0 and y in adj[var] and len(domains[y]) == 2 and domains[y] == domains[x]:
-                            return False
+    for x in range(n):
+        if assignments[x] == 0 and len(domains[x]) == 2:
+            for y in adj[x]:
+                if assignments[y] == 0 and domains[y] == domains[x]:
+                    for z in adj[x] & adj[y]:
+                        if assignments[z] == 0 and domains[y] <= domains[z]:
+                            if domains[y] == domains[z]:
+                                return False
+                            for val in domains[y]:
+                                domains[z].remove(val)
+                                domain_log[level].append((z, val))
+                            if len(domains[z]) == 1:
+                                arcs = [(k, z) for k in adj[z] if assignments[k] == 0]
+                                if not arc_consistency(arcs):
+                                    return False
     return True

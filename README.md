@@ -113,7 +113,7 @@ by eliminating redundant search paths and avoiding unnecessary computations.
 
 | file          | min colors | techniques enable | best scenario time | backtracking |
 |---------------|------------|-------------------|--------------------|--------------|
-| le450_5a.col  | 5 ✅        | -                 | 0.3s               | 166          |
+| le450_5a.col  | 5 ✅        | -                 | 0.2s               | 101          |
 | le450_5b.col  | 5 ✅        | -                 | 0.1s               | 4            |
 | le450_5c.col  | 5 ✅        | -                 | 0.1s               | 6            |
 | le450_5d.col  | 5 ✅        | -                 | 0.1s               | 0            |
